@@ -1,0 +1,135 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
+
+
+apply from: "$rootDir/dependencies.gradle"
+
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.2"
+
+    defaultConfig {
+        applicationId "com.encora.musicplayer"
+        minSdkVersion 21
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    // Kotlin Flow
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.coroutinesVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutinesVersion"
+
+    implementation 'androidx.core:core-ktx:1.3.2'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+
+    //ExoPlayer
+    implementation 'com.google.android.exoplayer:exoplayer-dash:2.10.4'
+    implementation 'com.google.android.exoplayer:exoplayer-core:2.10.4'
+
+
+    // Lifecycle (ViewModel + LiveData)
+    implementation "androidx.lifecycle:lifecycle-extensions:$versions.lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$versions.liveDataKtx"
+
+    // TikXML
+    implementation 'com.tickaroo.tikxml:annotation:0.8.13'
+    implementation 'com.tickaroo.tikxml:core:0.8.13'
+    implementation 'com.tickaroo.tikxml:converter-htmlescape:0.8.13'
+    kapt 'com.tickaroo.tikxml:processor:0.8.13'
+
+    // Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.tickaroo.tikxml:retrofit-converter:0.8.13'
+
+
+    //OkHttp
+    implementation("com.squareup.okhttp3:okhttp:4.9.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.9.0")
+
+
+    // RecyclerView
+    implementation "androidx.recyclerview:recyclerview:1.2.0-beta01"
+
+    //Swipe Refresh Layout
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01"
+
+
+    // KTX
+    implementation "androidx.core:core-ktx:$versions.coreKtxVersion"
+    implementation "androidx.fragment:fragment-ktx:$versions.fragmentKtxVersion"
+
+    // Dagger Hilt
+    implementation "com.google.dagger:hilt-android:$versions.hiltCoreVersion"
+    implementation "androidx.hilt:hilt-common:$versions.hiltVersion"
+    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$versions.hiltVersion"
+    kapt "com.google.dagger:hilt-compiler:$versions.hiltCoreVersion"
+    kapt "androidx.hilt:hilt-compiler:$versions.hiltVersion"
+
+
+    // startup
+    implementation "androidx.startup:startup-runtime:$versions.startupVersion"
+
+    //  Room Database
+    def room_version = "2.2.6"
+    implementation "androidx.room:room-runtime:$versions.roomVersion"
+    kapt "androidx.room:room-compiler:$versions.roomVersion"
+
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation "androidx.room:room-ktx:$versions.roomVersion"
+
+
+    // Material Design
+    implementation 'com.google.android.material:material:1.3.0-rc01'
+
+    // Koin
+    implementation("io.coil-kt:coil:1.1.1")
+
+
+    // debugging
+    implementation "com.jakewharton.timber:timber:4.7.1"
+
+
+}
